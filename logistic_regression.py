@@ -22,7 +22,7 @@ def cost_function(X, y, theta):
 
     :param X: Features of input data - a matrix
     :param y: Labels of input data - a vector
-    :param theta: Parameters - a matrix
+    :param theta: Parameters - a vector
     return
     """
 
@@ -37,4 +37,32 @@ def cost_function(X, y, theta):
     cost = (-1 / m) * ((y.T @ np.log(h)) + (1 - y).T @ np.log(1 - h))
 
     return cost
+
+def gradient_descent(X, y, theta, learning_rate, num_iter):
+    """
+    Perform gradient descent.
+
+    :param X: Features of input data - a matrix
+    :param y: Labels of input data - a vector
+    :param theta: Parameters - a vector
+    :param learning_rate: Learning rate
+    :param num_iter: Number of iterations gradient descent should be performed
+    return
+    """
+
+    # Number of records
+    m = len(y)
+
+    # Cost history - costs per each steps are recorded
+    cost_history = np.zeros((num_iter, 1))
+
+    # Gradient descent process
+    for i in range(num_iter):
+        # Update parameters
+        theta -= (learning_rate / m) * (X.T @ (sigmoid(X @ theta) - y))
+
+        # Record cost history
+        cost_history[i] = cost_function(X, y, theta)
+
+    return (cost_history, theta)
 
