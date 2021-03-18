@@ -47,7 +47,7 @@ def gradient_descent(X, y, theta, learning_rate, num_iter):
     :param theta: Parameters - a vector
     :param learning_rate: Learning rate
     :param num_iter: Number of iterations gradient descent should be performed
-    return
+    return (cost history, parameters after train)
     """
 
     # Number of records
@@ -66,3 +66,14 @@ def gradient_descent(X, y, theta, learning_rate, num_iter):
 
     return (cost_history, theta)
 
+def predict(X, theta):
+    """
+    Make predictions using user input features and parameters.
+
+    :param X: Features of input data - a matrix
+    :param theta: Parameters - a vector
+    return
+    """
+
+    # Since sigmoid returns a probability, it is rounded in order to output a class result(either 1 or 0 - since this is binary classification)
+    return np.round(sigmoid(X @ theta))
