@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from logistic_regression import cost_function, predict, gradient_descent
 
-def make_predictions_logreg(X, y, iterations = 1500, learning_rate = 0.01):
+def make_predictions_logreg(X, y, iterations = 1500, learning_rate = 0.01, plot_conv = False):
     """
     Make predictions using functions defined in logistic_regression.py
 
@@ -47,3 +47,26 @@ def make_predictions_logreg(X, y, iterations = 1500, learning_rate = 0.01):
     accuracy = float(sum(preds == y)) / float(len(y))
 
     print("Accuracy: {}".format(accuracy))
+
+    if plot_conv:
+        plot_convergence(cost_history)
+
+def plot_convergence(cost_history):
+    """
+    Plots convergence graph
+
+    :param cost_history:
+    return
+    """
+
+    plt.figure()
+    sns.set_style('white')
+
+    # Plot graph
+    plt.plot(range(len(cost_history)), cost_history, 'r')
+
+    plt.title("Convergence Graph")
+    plt.xlabel("Number of Iterations Done")
+    plt.ylabel("Cost")
+
+    plt.show()
